@@ -35,8 +35,8 @@ export default function AnimatedGradient({
 
     const resize = () => {
       const dpr = window.devicePixelRatio || 1;
-      canvas.width = canvas.offsetWidth * dpr;
-      canvas.height = canvas.offsetHeight * dpr;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
       ctx.scale(dpr, dpr);
     };
 
@@ -50,8 +50,8 @@ export default function AnimatedGradient({
     ];
 
     const blobs = Array.from({ length: 5 }, (_, i) => ({
-      x: Math.random() * canvas.offsetWidth,
-      y: Math.random() * canvas.offsetHeight,
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
       r: 150 + Math.random() * 200,
       vx: (Math.random() - 0.5) * 0.3,
       vy: (Math.random() - 0.5) * 0.3,

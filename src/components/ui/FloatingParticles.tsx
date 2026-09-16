@@ -50,16 +50,16 @@ export default function FloatingParticles({
 
     const resize = () => {
       const dpr = window.devicePixelRatio || 1;
-      canvas.width = canvas.offsetWidth * dpr;
-      canvas.height = canvas.offsetHeight * dpr;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
       ctx.scale(dpr, dpr);
     };
 
     resize();
     window.addEventListener("resize", resize);
 
-    const width = canvas.offsetWidth;
-    const height = canvas.offsetHeight;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
 
     particlesRef.current = Array.from({ length: count }, () => ({
       x: Math.random() * width,

@@ -13,8 +13,10 @@ export default function AnimatedGradient({
   const animationRef = useRef<number>();
   const timeRef = useRef(0);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setPrefersReducedMotion(mediaQuery.matches);
     const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
@@ -23,7 +25,7 @@ export default function AnimatedGradient({
   }, []);
 
   useEffect(() => {
-    if (prefersReducedMotion) return;
+    if (!mounted || prefersReducedMotion) return;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -117,9 +119,9 @@ export default function AnimatedGradient({
       window.removeEventListener("resize", resize);
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, [opacity, prefersReducedMotion]);
+  }, [opacity, prefersReducedMotion, mounted]);
 
-  if (prefersReducedMotion) {
+  if (!mounted || prefersReducedMotion) {
     return null;
   }
 

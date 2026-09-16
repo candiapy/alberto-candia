@@ -28,8 +28,10 @@ export default function FloatingParticles({
     opacity: number;
   }>>([]);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setPrefersReducedMotion(mediaQuery.matches);
     const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
@@ -38,7 +40,7 @@ export default function FloatingParticles({
   }, []);
 
   useEffect(() => {
-    if (prefersReducedMotion) return;
+    if (!mounted || prefersReducedMotion) return;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -117,9 +119,9 @@ export default function FloatingParticles({
       window.removeEventListener("resize", resize);
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, [count, color, size, speed, prefersReducedMotion]);
+  }, [count, color, size, speed, prefersReducedMotion, mounted]);
 
-  if (prefersReducedMotion) {
+  if (!mounted || prefersReducedMotion) {
     return null;
   }
 

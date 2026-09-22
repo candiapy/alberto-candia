@@ -163,6 +163,16 @@ export const projects: ProjectItem[] = [
     codeUrl: "https://github.com/candiapy",
     demoUrl: "https://github.com/candiapy",
   },
+  {
+    id: 4,
+    status: "live",
+    title: "FakeStore",
+    description:
+      "Tienda online desarrollada con Next.js, React y TypeScript, con catálogo de productos, búsqueda, filtros por categoría, carrito de compras persistente y una interfaz responsive.",
+    tech: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS 4", "TanStack Query", "Axios", "React Context", "REST API"],
+    codeUrl: "https://fake-store-five-umber.vercel.app/",
+    demoUrl: "https://fake-store-five-umber.vercel.app/",
+  },
 ];
 
 export const contactInfo: ContactInfo[] = [
